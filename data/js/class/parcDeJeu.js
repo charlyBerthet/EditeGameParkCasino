@@ -339,15 +339,20 @@
 		
 		this.name = name;
 		
+		
 		if (localStorage) {
+			
 			// Le navigateur supporte le localStorage
 				// on recupere les parcs
 			var local = localStorage['parcDeJeu'];
 			
+			var lesParcs = (local == "" || local == undefined || local == "undefined"? {} : JSON.parse(local) );
 			
-			var lesParcs = (local == "" ? {} : JSON.parse(local) );
+			
+			
 				// on ajoute le notre
 			lesParcs[name] = JSON.stringify(this) ;
+			
 			
 			
 			
@@ -471,12 +476,16 @@
 		if (localStorage) {
 			var parc = localStorage['parcDeJeu'];
 			
-			if(parc == 'undefined' || parc == undefined || parc == "")
-				return "Pas de parc éxistant.";
+			if(parc == 'undefined' || parc == undefined || parc == ""){
+				return "<p class='choixCharge' data-select='1' style='color:white;background-color:rgb(150,150,150)'>default</p>";
+			}
+				
 			
 			parc = JSON.parse(parc);
-			if(parc.length <= 0)
-				return "Pas de parc éxistant.";
+			if(parc.length <= 0){
+				return "<p class='choixCharge' data-select='1' style='color:white;background-color:rgb(150,150,150)'>default</p>";
+			}
+				
 			var poss = "";
 			for(var key in parc){
 				poss += "<p class='choixCharge' "+
@@ -486,7 +495,9 @@
 			}
 			return poss;
 		}else{
-			return "Pas de parc éxistant.";
+			return "<p class='choixCharge' data-select='1' style='color:white;background-color:rgb(150,150,150)'>default</p>";
+			
+				
 		}
 	};
 	

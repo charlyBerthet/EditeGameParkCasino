@@ -289,7 +289,7 @@ $(function(){
 		// si la sauvegarde select est 'vide' on demande dans creer une autre, sinon on la save sous le nom choisi
 		if(nameOfSave.toLowerCase() == "vide"){
 			// pop up demande nouveau nom
-			$("body").append("<div id='creatNameOfSave'><div><label>Enregistrer le parc</label><p>Veuillez donner le nom d'une nouvelle sauvegarde : </p></br><input type='text' placeHolder='saisir nom sauvegarde'/></br><p><span class='saisieError'></span></p></br><input type='button' value='Valider' id='validNewNameOfSauvegarde'/></div></div>");
+			$("body").append("<div id='creatNameOfSave'><div><label>Enregistrer le parc</label><p>Veuillez donner le nom d'une nouvelle sauvegarde : </p></br><input type='text' placeHolder='saisir nom sauvegarde'/></br><p><span class='saisieError'></span></p></br><input type='button' value='Valider' id='validNewNameOfSauvegarde'/> <input type='button' value='Annuler' id='AnnulNewNameOfSauvegarde'/></div></div>");
 			$("#validNewNameOfSauvegarde").siblings("input[type='text']").focus();
 			
 			$("#validNewNameOfSauvegarde").click(function(){
@@ -310,6 +310,10 @@ $(function(){
 					$(this).siblings("p").children(".saisieError").html("Saisie incorrecte : uniquement (0-9 a-z A-Z _ -) et 50 caractères max.");
 				}
 			});
+			
+			
+			
+			$("#AnnulNewNameOfSauvegarde").click(function(){$("#creatNameOfSave").remove();});
 		}else{
 			var isSave = parcDeJeu.saveEtat(nameOfSave);
 			$("#divSaveEtatParc").css("display","none");
