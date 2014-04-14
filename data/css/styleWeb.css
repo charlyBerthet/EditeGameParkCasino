@@ -1,0 +1,759 @@
+@CHARSET "ISO-8859-1";
+
+															/* GENERAL */
+* {
+	padding:0px;
+	margin:0px;
+	font-family:"Novecento Narrow Book",sans-serif,Calibry;
+	font-weight:lighter;
+}
+
+body{
+	background-color:rgba(220,220,220,1);
+	overflow:hidden;
+}
+
+#all{
+	background-color:rgba(220,220,220,1);
+	position:relative;
+	/*width:1000px;*/
+	margin:auto;
+	background-color:white;
+}
+
+input[type='button']{
+	cursor:pointer;
+	color:rgb(52, 52, 52);
+	font-weight:bold;
+	font-size:10pt;
+	background-color:rgba(170,170,170,0.3);
+	border:1px solid rgba(170,170,170,0.8);
+	padding:2px 7px;
+}
+
+
+input[type='button']:hover{
+	box-shadow:0px 0px 4px rgba(170,170,170,0.8);
+}
+
+
+input[type='button']:active{
+	box-shadow:inset 0px 0px 4px rgba(170,170,170,0.8);
+}
+
+
+
+
+																/* PARC DE JEU */
+#divParcDeJeu{
+	vertical-align:top;
+	display:inline-block;
+	width:800px;
+	height:600px;
+	box-shadow:100px 0px 0px rgba(220,220,220,1);
+	background-color:rgba(220,220,220,1);
+}
+#parcDeJeu{
+	border-collapse:collapse;
+	border:1px solid black;
+}
+
+.emplacement{
+	border:1px solid rgba(170,170,170,0.8);
+	cursor:pointer;
+	overflow:hidden;
+	background-position:center;
+	background-repeat:repeat-x;
+	
+}
+.contentEmplacement{
+	/*overflow:hidden;*/
+	font-size:8pt;
+	color:rgba(40,40,40,1);
+	margin:auto;
+	/*border:1px solid red;*/
+	text-align:center;
+}
+.contentEmplacement .titleEmplacement{
+	padding-top:1px;
+	padding-bottom:1px;
+	font-weight:bold;
+	font-size:9pt;
+}
+.contentEmplacement .jeu{
+	color:rgba(250,30,10,1);
+	/*text-shadow: -1px 0 rgb(100,100,100), 0 1px rgb(150,150,150), 1px 0 rgb(150,150,150), 0 -1px rgb(150,150,150);*/
+}
+.emplacement:hover{
+	background-color:rgba(170,170,170,0.3);
+	box-shadow:0px 0px 3px rgba(70,70,190,0.8);
+}
+
+.emplacement:active{
+	background-color:rgba(170,170,170,0.3);
+	box-shadow:inset 0px 0px 3px rgba(70,70,190,0.8);
+}
+
+
+#emplacementEnMouvement{
+	z-index:6;
+}
+
+
+/* DELETE DU PARC */
+#deleteDuParc{
+	opacity:0;
+	display:none;
+	position:fixed;
+	color:rgb(40,40,40);
+	top:75%;
+	left:50%;
+	font-size:8pt;
+	z-index:7;
+	padding:12px 13px;
+	background-color:rgba(180,180,180,0.7);
+	border:1px solid rgba(100,100,100,0.2);
+	border-radius:60px;
+	cursor:pointer;
+}
+#deleteDuParc div{
+	background-color:rgba(190,190,190,1);
+	box-shadow:0px 0px 20px rgba(140,140,140,1);
+	padding:8px 13px;
+	border-radius:20px;
+	
+}
+
+#deleteDuParc div:hover{
+	background-color:rgba(210,210,210,1);
+}
+
+
+
+
+/* OBJET */
+.titleObjet{
+	/*color:rgba(255,255,255,0);*/
+	display:none;
+	padding-top:5px !important;
+}
+
+
+/* DETAIL EMPLACEMENT */
+#detailMachine{
+	position:absolute;
+	border:1px solid rgba(70,70,70,0.8);
+	box-shadow:0px 0px 5px rgba(120,120,120,0.8);
+	background-color:rgba(220,220,220,0.8);
+	padding:10px;
+	color:rgba(40,40,40,1);
+	border-radius:0px 15px 15px 15px;
+}
+#detailMachine div{
+	display:inline-block;
+	vertical-align:top;
+	margin:2px;
+}
+#detailMachine p{
+	border:1px solid red;
+}
+#detailMachine .titleDetail{
+	font-weight:bold;
+	
+	display:block !important;
+}
+#detailMachine .dataDetail{
+	display:block !important;
+}
+
+
+
+/* SEARCH MAS */
+
+#searchMAS{
+	padding:2px;
+	display:inline-block;
+	vertical-align:top;	
+	position:absolute;
+	bottom:100px;
+	right:10px;
+	border-radius:9px 0px 0px 9px;
+	box-shadow:0px 0px 5px rgb(70,70,70);
+	background-color:rgb(240,240,240);
+}
+#openOrCloseSearch{
+	display:inline-block;
+	vertical-align:top;
+	padding:10px 10px;
+	cursor:pointer;
+	border-radius:9px 0px 0px 9px;
+	background-color:rgb(220,220,220);
+	box-shadow:0px 0px 5px rgb(70,70,70);
+	background-image:url(../img/search.png);
+	background-repeat:no-repeat;
+	background-position:center;
+	margin-right:5px;
+}
+#openOrCloseSearch:hover{background-color:rgb(200,200,200);}
+#openOrCloseSearch:active{box-shadow:0px 0px 5px rgb(150,150,150);}
+#inSearchMAS{
+	display:none;
+	width:80px;
+}
+
+#searchMAS button{
+	cursor:pointer;	
+	display:inline-block;
+	vertical-align:top;
+	padding:0px;
+	font-size:7pt;
+	display:none;
+}
+
+
+/* FULL SCREEN */
+#fullScreen{
+	position:absolute;
+	width:25px;
+	height:25px;
+	margin-left:3px;
+	margin-top:3px;
+	cursor:pointer;
+	background-color:rgb(220,220,220);
+	border-radius:20px;
+	opacity:0.3;
+	border:1px solid rgb(120,120,120);
+	background-image:url(../img/fullScreen.png);
+	background-repeat:no-repeat;
+	background-position:center;
+}
+#fullScreen:hover{opacity:1;	box-shadow:0px 0px 2px rgb(120,120,120);}
+#fullScreen:active{opacity:1;	box-shadow:inset 0px 0px 2px rgb(120,120,120);}
+
+
+													/* PARAMETRE */
+#divParametrage{
+	background-color:rgba(220,220,220,1);
+	vertical-align:top;
+	display:inline-block;
+	/*border:1px solid red;*/
+	width:185px;
+	height:600px;
+	box-shadow:10px 0px 0px rgba(220,220,220,1);
+}
+
+.parametre{
+	vertical-align:top;
+	margin:20px 5px;
+}
+
+.parametre .butParametre{
+	border:2px solid #999999; 
+	border-radius:20px;
+	width:150px;
+	height:30px;
+	background-color:rgb(230,230,230);
+	color:rgb(90,90,90);
+}
+
+.parametre .butParametre:active{
+	box-shadow:inset 0px 0px 7px rgb(70,70,70);
+}
+.divParametre .flecheH{
+	width:10px;
+	height:15px;
+	position:absolute;
+	left:60px;
+	top:-10px;
+	background-image:url(../img/flecheH.png);	
+	background-repeat:no-repeat;
+	background-position:center;
+}
+
+.divParametre,.divParametrePlus{
+	position:absolute;
+	background-color:rgb(240,240,240);
+	border:1px solid rgba(100,100,100,0.8);
+	padding:15px;
+	text-align:center;
+	display:none;
+	z-index:5;
+	margin-left:-50px;
+	border-radius:5px;
+}
+
+.divParametrePlus{
+	margin-left:0px !important;
+	margin-top:5px;
+}
+
+.butParametrePlus{
+	margin-top:7px;
+}
+
+
+
+.divParametre label{
+	color:rgba(50,50,50,1);
+	font-size:9pt;
+}
+.divParametre p{
+	margin-bottom:5px;
+}
+
+.titleParametre{
+	font-weight:bold;
+	color:rgba(50,50,50,1);
+}
+
+
+/* SWITCH ECRAN */
+.switchEcran{
+	position:absolute;
+	padding:7px 18px;
+	border-radius:5px;
+	background-color:rgb(200,200,200);
+	background-position:center;
+	background-repeat:no-repeat;
+	cursor:pointer;
+	border:1px solid rgb(190,190,190);
+}
+.switchEcran:hover{box-shadow:0px 0px 1px rgb(150,150,150);}
+.switchEcran:active{box-shadow:inset 0px 0px 1px rgb(150,150,150);}
+#ecranAppliGoogleMap{
+	background-image:url(../img/switchInv.png);
+	top:3px;
+	left:3px;
+}
+#ecranAppliParcDeJeu{
+	background-image:url(../img/switch.png);
+	top:3px;
+	right:3px;
+}
+
+/* DIV AJOUTER OBJET */
+#divAddObjet{
+	width:180px;
+}
+#tableOfObjet label{
+	font-size:8pt;
+	color:rgb(70,70,70);
+}
+
+#tableOfObjet img{
+	cursor:pointer;
+	border:1px solid rgb(150,150,150);
+	background-color:rgb(220,220,220);
+}
+#tableOfObjet img:hover{
+	box-shadow:0px 0px 5px rgb(150,150,150);
+}
+#tableOfObjet img:active{
+	box-shadow:inset 0px 0px 5px rgb(150,150,150);
+}
+
+#tableOfObjet td input{
+	width:20px;
+	height:20px;
+	font-size:8pt;
+}
+
+
+/* NAME PARC */
+#nameParc{
+	font-size:7pt;
+	font-weight:bold;
+	color:rgb(70,70,70);
+}
+
+
+
+/* CHARGER PARC */
+#butValidChargeParc{margin-top:10px;}
+
+
+
+/* ENREGISTRE / SAVE LE PARC */
+#divSaveEtatParc{
+	width:200px;
+}
+#emplSaveParc,#choixDeParcACharger{
+	border:1px solid rgb(190,190,190);
+	width:200px;
+	height:75px;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+
+.choixCharge{
+	border:1px solid rgb(190,190,190);
+	color:rgb(90,90,90);
+	cursor:pointer;
+	margin:0px !important;
+	background-color:rgb(255,255,255);
+}
+
+.choixCharge:hover{background-color:rgb(220,220,220);}
+
+#creatNameOfSave{
+	z-index:9;
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	background-color:rgba(0,0,0,0.5);
+}
+
+#creatNameOfSave div{
+	position:relative;
+	padding:15px;
+	border-radius:15px;
+	width:200px;
+	background-color:rgb(240,240,240);
+	margin:auto;
+	margin-top:20px;
+	font-size:8pt;
+	text-align:center;
+}
+
+#creatNameOfSave div label{
+	font-size:11pt;
+	font-weight:bold;
+}
+
+#creatNameOfSave div p{margin-top:5px; margin-bottom:5px;}
+
+#creatNameOfSave div input{	margin-bottom:5px;}
+
+.saisieError{color:red;font-size:8pt; font-weight:bold;}
+
+
+
+
+	/* NB EMPLACEMENTS */
+#nbEmplacement{
+	width:200px;
+}
+#nbEmplacement .in{
+	width:100px;
+}
+#nbEmplacement #butValidNbEmplacement{
+	margin-top:5px;
+}
+
+
+/* AJOUTER */
+#divAjouter .butParametrePlus{
+	width:100px;
+}
+
+
+#divParc .butParametrePlus{
+	width:100px;
+}
+
+
+/* AJOUTER UNE MACHINE A SOUS */
+#divParamsMachine{
+	margin-top:15px;
+	text-align:left;
+	width:255px;
+}
+
+#paramsMachineLabel{
+	/*border:1px solid red;*/
+	display:inline-block;
+	vertical-align:top;
+}
+#paramsMachineInput{
+	/*border:1px solid green;*/
+	display:inline-block;
+	vertical-align:top;
+}
+
+
+
+
+
+/* EXTRACTION DU PARC */
+#divExtractParc{
+	width:250px;
+}
+#divExtractParc textArea{margin-bottom:10px;margin-top:10px;}
+#copierExtraction,#lireExtraction{
+	margin:auto;
+	border:1px solid rgb(180,180,180);
+	width:200px;
+	height:50px;
+	overflow:auto;
+	background-color:white;
+}
+.infoParametre{
+	font-size:8pt !important;
+}
+
+
+
+
+/* VOIR LES MACHINE */
+#divVoirMachinesASous{
+	width:250px;
+	height:300px;
+}
+#lesMachines{
+	text-align:left;
+	border:1px solid rgba(170,170,170,1);
+	padding:5px;
+	width:240px;
+	height:260px;
+	overflow:hidden;
+	overflow-y:scroll;
+}
+#lesMachines span{
+	display:block;
+	padding:2px;
+	z-index:3;
+}
+
+.machineASous{
+	margin-bottom:2px;
+	padding-bottom:2px;
+	border-bottom:1px solid rgba(170,170,170,0.9);
+	color:rgba(50,50,50,1);
+	font-size:11pt;
+}
+.machineASous .label{
+	display:inline !important;
+	font-weight:bold;
+	font-size:8pt !important;
+}
+.machineASous .numMachine{
+	box-shadow:0px 0px 2px rgba(100,100,100,0.4);
+	background-color:rgba(240,240,240,1);
+	margin-top:-12px;
+}
+.machineASous .numMachine:hover{
+	cursor:pointer;
+	box-shadow:0px 0px 4px rgba(100,100,100,0.8);
+}
+
+.machineASous .numMachine:active{
+	box-shadow:inset 0px 0px 5px rgba(100,100,100,0.8);
+}
+
+.machineASous .info{
+	display:inline !important;
+}
+.ordreViewMachine{
+	padding:0px !important;
+	margin:0px 5px;
+	font-size:7pt !important;
+}
+
+/* option */
+.option{
+	color:white;
+	font-weight:bold;
+	cursor:pointer;
+	font-size:9pt;
+	box-shadow:0px 0px 1px rgba(20,20,20,0.8);
+	border-radius:5px;
+	opacity:0.8;
+}
+
+.option:hover{
+	box-shadow:0px 0px 3px rgba(20,20,20,1);
+	opacity:1;
+}
+
+.option:active{
+	box-shadow:inset 0px 0px 3px rgba(20,20,20,1);
+	opacity:1;
+}
+
+/* delete la machine */
+.deleteThisMachine{
+	background-color:rgba(250,35,35,0.9);
+	margin-left:10px;
+	padding:1px 5px !important;
+}
+
+
+#divEtesVousSurDelete{
+	position:absolute;
+	background-color:rgba(240,240,240,1);
+	border:1px solid rgba(170,170,170,0.8);
+	padding:15px;
+	box-shadow:0px 0px 5px rgba(170,170,170,0.8);
+	z-index:4;
+	top:50px;
+	left:0px;
+	display:none;
+}
+
+/* move la machine */
+.moveThisMachine{
+	background-color:rgba(35,35,250,0.9);
+	margin-left:10px;
+	padding:1px 7px !important;
+}
+
+/* Update la machine */
+.updateThisMachine{
+	background-color:rgba(35,200,35,0.9);
+	margin-left:120px;
+	padding:1px 7px;
+}
+
+
+/* TOGLE ON OFF AUTOSAVE */
+    .onoffswitch {
+    position: relative; width: 78px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    }
+    .onoffswitch-checkbox {
+    display: none;
+    }
+    .onoffswitch{
+    	display:inline-block;
+    	vertical-align:center;
+    }
+    .onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+    }
+    .onoffswitch-inner {
+    width: 200%; margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+    }
+    .onoffswitch-inner:before, .onoffswitch-inner:after {
+    float: left; width: 50%; height: 26px; padding: 0; line-height: 26px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+    }
+    .onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color: #2FCCFF; color: #FFFFFF;
+    }
+    .onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+    }
+    .onoffswitch-switch {
+	    width: 15px; margin: 5.5px;
+	    background: #FFFFFF;
+	    border: 2px solid #999999; border-radius: 20px;
+	    position: absolute; top: 0; bottom: 0; right: 48px;
+	    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+	    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s;
+    }
+    .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+    }
+    .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+    }
+    
+    #autoSave{
+    	display:inline-block;
+    	vertical-align:top;
+    	font-weight:bold;
+    	color:rgb(70,70,70);
+    	text-align:center;
+    	margin-right:5px;
+    }
+    
+    #validAutoSave{
+    	opacity:0;	
+     	display:inline-block;
+    	vertical-align:top;
+    	border-radius:8px 7px 8px 7px;
+    	margin-top:5px;
+    	padding:10px 10px;
+    	background-color:rgba(50,220,50,0.7);
+    }
+ 
+ 
+ 
+ /* CLOSE OU OPEN DIV PARAMETRE */
+ #openOrCloseDivParametre{
+ 	position:relative;
+ 	margin:auto;
+ 	border-radius:30px 30px 80px 80px;
+ 	opacity:0;
+ 	background-color:rgb(120,120,120);
+ 	cursor:pointer;
+ 	z-index:4;
+ 	margin-bottom:-20px;
+ 	width:55px;
+	height:20px;
+ }
+  #openOrCloseDivParametre div#div1{
+	position:relative;	
+ 	width:25px;
+ 	height:2px;
+ 	background-color:rgb(160,160,160);
+ 	margin:auto;
+ 	top:25%;
+ 	border-radius:3px;
+ }
+ #openOrCloseDivParametre div#div2{
+	position:relative;	
+ 	width:15px;
+ 	height:8px;
+ 	background-color:rgb(160,160,160);
+ 	margin:auto;
+ 	top:40%;
+ 	border-radius:30px 30px 80px 80px;
+ }
+ #openOrCloseDivParametre:active{
+ 	box-shadow:inset 0px 0px 3px rgb(200,200,200);
+ 	opacity:1;
+ }
+ 
+ 
+ 
+ 
+ 																/* GOOGLE MAP */
+
+
+/* MAP */							
+#divGoogleMap{
+	width:100%;
+}
+
+/* SWITCH ECRAN */
+#ecranAppliGoogleMap{
+	left:5px;
+	top:2px;
+	background-color:rgb(255,255,255);
+	border:none;
+	box-shadow:0px 0px 3px rgb(90,90,90);
+}
+#ecranAppliGoogleMap:hover{	background-color:rgb(235,235,235);}
+#ecranAppliGoogleMap:active{ box-shadow:inset 0px 0px 3px rgb(90,90,90);}
+
+/* LEGENDE MAP */
+#legende{
+	position:fixed;
+	padding:10px;
+	color:rgb(50,50,50);
+	box-shadow:0px 0px 3px rgb(90,90,90);
+	background-color:rgba(255,255,255,0.7);
+	top:100px;
+	border-radius:20px;
+	right:10px;
+}	
+#legende h3{
+	text-align:center;
+}
+#legende p{width:200px;}
+#legende p span{
+	position:absolute;
+	margin-top:15px;
+}

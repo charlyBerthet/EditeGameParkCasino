@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+<head>
+	<title>Casino de Megeve</title>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta name="author" content="Charly Berthet" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	
+	<link rel="icon" type="image/png" href="data/img/logo.png" />
+	
+	<!-- INCLUSION CSS -->
+	<link rel="stylesheet" type="text/css" href="data/css/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="data/css/styleWeb.css" />
+	
+	
+	<!-- INCLUSION js JQUERY -->
+	<script type="text/javascript" src="data/js/jquery.js"></script>
+	<script type="text/javascript" src="data/js/jquery-ui.js"></script>
+	<script type="text/javascript" src="data/js/jquery.clippy.js"></script>
+	<!-- INCLUSION GOOGLE MAP -->
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGvhpwzTzCYKXgEi0cBHuLHpIr-MQehwo&sensor=true"></script>
+	<!-- INCLUSION js CLASS -->
+	<script type="text/javascript" src="data/js/class/emplacement.js"></script>
+	<script type="text/javascript" src="data/js/class/machineASous.js"></script>
+	<script type="text/javascript" src="data/js/class/objet.js"></script>
+	<script type="text/javascript" src="data/js/class/parcDeJeu.js"></script>
+	<script type="text/javascript" src="data/js/class/MyGoogleMap.js"></script>
+	<!-- INCLUSION js MAIN -->
+	<script type="text/javascript" src="data/js/event.js"></script>
+	<script type="text/javascript" src="data/js/main.js"></script>
+</head>
+	
+<header>
+	
+</header>
+
+<div id='all'>
+	<body>
+	
+		<div id="appliParcDeJeu">
+		
+			<!-- PARAMETRAGE -->
+			<div id="divParametrage">
+		
+		
+				<!-- PLEINE ECRAN -->
+				<div id="fullScreen" data-info='0'></div>
+				
+				<!-- LES MACHINE -->
+				<div class='parametre slideOpacity'>
+					<input class='butParametre' data-image='data/img/banque.png' id='butVoirMachines' type='button' value='Les machines' data-content='Les machines'/>
+					<div class='divParametre' id='divVoirMachinesASous'>
+						<i class='flecheH'></i>
+						<p class='titleParametre'>
+							<input type="button" value="v" class="ordreViewMachine" data-order="-1"/>
+							Vos machines à sous
+							<input type="button" value="^" class="ordreViewMachine" data-order="1"/>
+						</p>
+						<div id='divEtesVousSurDelete'>
+							<p><label>Êtes-vous sûr de vouloir supprimer la machine n°<span id='supMachNum'>undefined</span> ?</label></p>
+							<input type='button' value='Oui' id='supMachNumOui' />
+							<input type='button' value='Non' id='supMachNumNon' />
+						</div>
+						<div id='lesMachines'>
+						
+						</div>
+					</div>
+				</div>
+				
+			
+		
+				<!-- AJOUTER -->
+				<div class='parametre slideOpacity'>
+					<input class='butParametre' data-image='data/img/ajouter.png' type='button' value="Ajouter" data-content='Ajouter'/>
+					<div class='divParametre' id='divAjouter'>
+						<i class='flecheH'></i>
+						<p class='titleParametre'>Ajouter</p>
+						
+						<!-- UNE MACHINE -->
+						<input class='butParametrePlus' data-image='data/img/plusMas.png' id='butAjouterMachine' type='button' value='Une machine' data-content='Une machine'/>
+						<div class='divParametrePlus' id='divAllParamsMachine'>
+							<i class='flecheH'></i>
+							<p class='titleParametre'>Ajout d'une machine à sous</p>
+							<div id='divParamsMachine'>
+								<div id="paramsMachineLabel">
+									<p><label>Machine N°</label></p>
+									<p><label>Marque</label></p>
+									<p><label>Socle N°</label></p>
+									<p><label>Dénomination</label></p>
+									<p><label>Accepte billets</label></p>
+									<p><label>Accepte tickets</label></p>
+									<p><label>Accepte jetons</label></p>
+									<p><label>Type de jeu</label></p>
+								</div>
+								
+								<div id="paramsMachineInput">						
+									<p>
+										<input id='inNumMach' placeHolder='saisir n° machine'/>
+									</p>
+									<p>
+										<input id='inMarque' placeHolder='saisir marque machine'/>
+									</p>
+									<p>
+										<input id='inNumSocle' placeHolder='saisir n° socle'/>
+									</p>
+									<p>
+										<input id='inDeno' placeHolder='saisir dénomination'/>
+									</p>
+									<p>
+										<select id='inBillet'>
+											<option>Oui</option>
+											<option selected='selected'>Non</option>
+										</select>
+									</p>
+									<p>
+										<select id='inTicket'>
+											<option>Oui</option>
+											<option selected='selected'>Non</option>
+										</select>
+									</p>
+									<p>
+										<select id='inJeton'>
+											<option>Oui</option>
+											<option selected='selected'>Non</option>
+										</select>
+									</p>
+									<p>
+										<input id='inJeu' placeHolder='saisir le jeu'/>
+									</p>
+								</div>
+							</div>
+							<input id='validAjoutMachine' type='button' value='Valider'/>
+						</div>
+						
+						<!-- UN OBJET -->
+						<input class='butParametrePlus' data-image='data/img/plusObj.png' id='butAjouterObjet' type='button' value='Un objet' data-content='Un objet'/>
+						<div class='divParametrePlus' id="divAddObjet">
+						<i class='flecheH'></i>
+							<p>
+								<p class='titleParametre'>Objets</p>
+		
+								<table id='tableOfObjet'>
+									<tr>
+										<td><p><label>Bar</label></p><img src='data/img/bar.png' width='40px'/></td>
+										<td><p><label>Caisse</label></p><img src='data/img/caisse.png' width='40px'/></td>
+									</tr>
+									
+								</table>
+							</p>
+						</div>
+					</div>
+				</div>
+		
+				
+				
+				
+				<!-- PARC -->
+				<div class='parametre slideOpacity'>
+					<input class='butParametre' id="butParamParc" data-image='data/img/parc.png' type='button' value="Parc" data-content='Parc'/>
+					<div class='divParametre' id='divParc'>
+						<i class='flecheH'></i>
+						<p class='titleParametre'>Parc <span id='nameParc'></span></p>
+						
+						
+						<!-- NOMBRE EMPLACEMENTS -->
+						<input class='butParametrePlus' data-image='data/img/size.png' id='butNbEmplacement' type='button' value='Taille' data-content='Taille'/>
+						<div class='divParametrePlus' id='nbEmplacement'>
+							<i class='flecheH'></i>
+							<p class='titleParametre'>Taille du parc</p>
+							<p>
+								<label>Largeur</label>
+								<input class='in' placeHolder='' id='nbEmplacementLargeur' />
+							</p>
+							<p>
+								<label>Hauteur</label>
+								<input class='in' placeHolder='' id='nbEmplacementHauteur' />
+							</p>
+							<input id='butValidNbEmplacement' type='button' value='Valider' />
+						</div>
+					
+					
+						<!-- EXTRAIRE -->
+						<input class='butParametrePlus' id='extractParc' data-image='data/img/extract.png' type='button' value="Extraire" data-content='Extraire'/>
+						<div class='divParametrePlus' id='divExtractParc'>
+						<i class='flecheH'></i>
+							<div>
+								<p class='titleParametre'>Extraction</p>
+								<p class='infoParametre'>Copiez cette extraction pour la lire dans un autre parc :</p>
+								<p><textArea id='copierExtraction' readonly>
+									
+								</textArea></p>
+								<p >Cliquez sur (<span id="copyExtract"></span>) pour copier l'extraction.</p>
+								
+								
+							</div>
+						</div>
+						
+						
+						<!-- LIRE -->
+						<input class='butParametrePlus' id='lireParc' data-image='data/img/lire.png' type='button' value="Lire" data-content='Lire'/>
+						<div class='divParametrePlus' id='divLireParc'>
+						<i class='flecheH'></i>
+							<div>
+								<p class='titleParametre'>Coller ici une extraction à lire :</p>
+								<p><textArea id='lireExtraction'>
+								
+								</textArea></p>
+								
+								<p>
+									<input type='button' value='Clear' onclick="Javascript:document.getElementById('lireExtraction').value = '';" style='font-size:7pt; margin-right:20px; border-radius:20px; padding:2px 3px; opacity:0.8;'/>
+									<input type='button' value='Lire' id='lireExctration'/>
+								</p>
+							</div>
+						</div>
+						
+						
+						
+						
+						
+						<!-- CHARGER -->
+						<input class='butParametrePlus' id='chargeParc' data-image='data/img/charge.png' type='button' value="Charger" data-content='Charger'/>
+						<div class='divParametrePlus' id='divChargeEtatParc'>
+							<i class='flecheH'></i>
+							<p class='titleParametre'>Charger un parc</p>
+							<p>
+								<div id="choixDeParcACharger">
+								
+								</div>
+								
+								<input id='butValidChargeParc' type='button' value='Valider'/>
+							</p>
+						</div> 
+						
+						
+						
+						
+						
+						<!-- ENREGISTRER -->
+						<input class='butParametrePlus' id='saveEtatParc' data-image='data/img/save.png' type='button' value="Enregistrer" data-content='Enregistrer'/>
+						<div class='divParametrePlus' id='divSaveEtatParc'>
+							<i class='flecheH'></i>
+							<p class='titleParametre'>Enregistrer le parc</p>
+							<p>
+								<p>
+									<label>Où voulez-vous enregistrer le parc ?</label>
+									<div id="emplSaveParc">
+										
+									</div>
+								</p>
+								<input id='butSaveOui' type='button' value='Oui'/>
+								<input id='butSaveNon' type='button' value='Non'/>
+							</p>
+						</div> 
+					</div>
+				</div>
+				
+				
+				
+				
+				<!-- TOGLE AUTO SAVE -->
+				<div class='parametre slideOpacity' id='paramAutoSave'>
+					<p id='autoSave'>Auto-save</p>
+					<div class="onoffswitch">
+					    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="butAutoSave">
+					    <label class="onoffswitch-label" for="butAutoSave">
+						    <div class="onoffswitch-inner"></div>
+						    <div class="onoffswitch-switch"></div>
+					    </label>
+				    </div> 
+				</div>
+				
+				
+				
+				<!--  SWITCH ECRAN -->
+				<div id="ecranAppliParcDeJeu" class='switchEcran slideOpacity'></div>
+			</div>
+	
+			
+			
+			
+			<!-- FERME & OUVRE DIV PARAMETRAGE -->
+			<div id="openOrCloseDivParametre">
+				<div id="div1"></div>
+				<div id="div2"></div>
+			</div>
+	
+			
+			<!-- PARC DE JEU -->
+			<div id="divParcDeJeu">
+				<table id='parcDeJeu'>
+					
+				</table>
+				
+				<!-- DELETE OBJET DU PARC -->
+				<div id="deleteDuParc"><div>x</div></div>
+				
+				
+				<!-- SEARCH MAS DANS PARC -->
+				<div id="searchMAS"><div id="openOrCloseSearch"></div><input type='text' id="inSearchMAS" placeHolder="n° machine"/><button>x</button></div>
+			</div>
+		</div><!-- fin div appli parc de jeu -->
+		
+		
+		
+		<div id="appliGoogleMap">			
+			
+			<!-- GOOGLE MAP -->
+			<div id="divGoogleMap"></div>
+			
+			<!-- LEGENDE GOOGLE MAP -->
+			<div id="legende">
+				<h3>Légende</h3>
+				<p><img src="data/img/legendeCasinoMegeve.svg"/><span>Casino de Megeve</span></p>
+				<p><img src="data/img/legendeClientsVIP.svg"/><span>Clients VIP</span></p>
+				<p><img src="data/img/legendeAutresClients.svg"/><span>Autres clients</span></p>
+			</div>
+			
+			
+			<!--  SWITCH ECRAN -->
+			<div id="ecranAppliGoogleMap" class="switchEcran"></div>
+			
+		</div><!-- fin div appli GoogleMap -->
+		
+	</body>
+</div><!-- fin div all -->
+
+<footer>
+	
+</footer>
+</html>
+
+

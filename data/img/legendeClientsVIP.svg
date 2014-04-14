@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g display="none">
+  <title>Layer 1</title>
+  <text transform="matrix(0.495354, 0, 0, 0.516167, 25.8588, 5.23579)" font-weight="bold" xml:space="preserve" text-anchor="middle" font-family="Sans-serif" font-size="24" id="svg_1" y="34.112473" x="45.676176" stroke-width="0" stroke="#000000" fill="#3a3a39">Legende</text>
+  <text transform="matrix(0.338381, 0, 0, 0.335346, 26.2927, 50.9378)" xml:space="preserve" text-anchor="middle" font-family="Sans-serif" font-size="24" id="svg_2" y="68.486347" x="51.862445" stroke-width="0" stroke="#000000" fill="#3a3a39">Clients</text>
+  <text transform="matrix(0.339575, 0, 0, 0.336872, 14.2754, 49.3552)" xml:space="preserve" text-anchor="middle" font-family="Sans-serif" font-size="24" id="svg_3" y="37.808492" x="109.667146" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#3a3a39">Clients VIP</text>
+  <text transform="matrix(0.300579, 0, 0, 0.30892, -11.3141, 31.7831)" xml:space="preserve" text-anchor="middle" font-family="Sans-serif" font-size="24" id="svg_4" y="55.015327" x="243.905968" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#3a3a39">Casino de Megeve</text>
+  <ellipse id="svg_6" ry="4.326289" rx="4.1767" cy="60.113251" cx="17.650259" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="3" stroke="#ff0000" fill="#e0c900"/>
+  <ellipse id="svg_7" ry="2.337571" rx="2.586136" cy="72.743722" cx="17.476466" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="3" stroke="#f73636" fill="#f75151"/>
+  <ellipse id="svg_5" ry="15.238789" rx="15.685642" cy="123.220478" cx="84.377671" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="8" stroke="#0000ff" fill="#3654f9"/>
+  <ellipse id="svg_10" ry="4.326289" rx="4.1767" cy="60.113251" cx="17.650259" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="3" stroke="#ff0000" fill="#e0c900"/>
+  <ellipse id="svg_11" ry="4.326289" rx="4.1767" cy="60.113251" cx="17.650259" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="3" stroke="#ff0000" fill="#e0c900"/>
+  <ellipse id="svg_12" ry="4.326289" rx="4.1767" cy="60.113251" cx="17.650259" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="3" stroke="#ff0000" fill="#e0c900"/>
+ </g>
+ <g display="inline">
+  <title>Calque 2</title>
+  <ellipse id="svg_14" ry="11.813022" rx="12.398457" cy="23.803996" cx="24.404085" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="9" stroke="#ff0000" fill="#e0c900"/>
+ </g>
+</svg>
