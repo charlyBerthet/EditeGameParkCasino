@@ -144,10 +144,12 @@ input[type='button']:active{
 	position:absolute;
 	border:1px solid rgba(70,70,70,0.8);
 	box-shadow:0px 0px 5px rgba(120,120,120,0.8);
-	background-color:rgba(220,220,220,0.8);
+	background-color:rgba(220,220,220,0.9);
 	padding:10px;
 	color:rgba(40,40,40,1);
 	border-radius:0px 15px 15px 15px;
+	z-index:5;
+	font-size:8pt;
 }
 #detailMachine div{
 	display:inline-block;
@@ -155,7 +157,7 @@ input[type='button']:active{
 	margin:2px;
 }
 #detailMachine p{
-	border:1px solid red;
+	/*border:1px solid red;*/
 }
 #detailMachine .titleDetail{
 	font-weight:bold;
@@ -231,7 +233,103 @@ input[type='button']:active{
 #fullScreen:active{opacity:1;	box-shadow:inset 0px 0px 2px rgb(120,120,120);}
 
 
-													/* PARAMETRE */
+
+
+
+/* DETAIL FIX EMPLACEMENT */
+#detailFixEmp{
+	position:absolute;
+	top:65px;
+	left:0px;
+	background-color:rgba(245,245,245,1);
+	border-radius:5px;
+	padding:5px 20px;
+	color:rgb(60,60,60);
+	box-shadow:0px 0px 3px rgb(40,40,40);
+	display:none;
+	min-width:100px;
+	width:190px;
+}
+#titleDetailFixEmp,#numMachDetailFixEmp{
+	position:relative;
+	text-align:center;
+	font-size:10pt;
+	font-weight:bold;
+	margin-bottom:10px;
+	text-decoration:underline;
+	margin-top:-10px;
+}
+.titleDiv{
+	font-size:9pt;
+	font-weight:bold;
+	text-align:center;
+	margin-bottom:5px;
+	margin-top:5px;
+	box-shadow:0px 0px 2px rgba(70,70,70);
+	cursor:pointer;
+}
+
+.titleDiv:hover{box-shadow:0px 0px 4px rgba(70,70,70);}
+
+
+	/* infos */
+
+
+#divLabelDetailFixEmp,#divInfoDetailFixEmp{
+	position:relative;
+	display:inline-block;
+	vertical-align:top;
+	font-size:9pt;
+	text-align:left;
+}
+#divLabelDetailFixEmp p{
+	font-weight:bold !important;
+}
+#divInfoDetailFixEmp p{
+	max-width:100px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+
+#divInfoDetailFixEmp div{
+	display:inline-block;
+	vertical-align:top;
+}
+#detailMachFixEmp{
+	position:relative;
+	margin:auto;
+	text-align:center;
+	display:none;
+}
+	/* close */
+#closeDetailFixEmp{
+	position:relative;
+	border-radius:5px;
+	padding:0px 3px;
+	font-size:8pt;
+	background-color:rgba(255,50,50,0.8);
+	color:white;
+	z-index:4;
+}
+#closeDetailFixEmp:hover{box-shadow:0px 0px 4px rgb(70,70,70);}
+#closeDetailFixEmp:active{box-shadow:inset 0px 0px 4px rgb(70,70,70);}
+#pcloseDetailFixEmp{
+	text-align:right;
+	margin-top:-7px;
+	margin-right:-18px;
+}
+
+/* PERFORMANCES */
+#performanceMachFixEmp{
+	display:none;
+	font-size:8pt;
+}
+
+
+
+	
+																				/* PARAMETRE */
 #divParametrage{
 	background-color:rgba(220,220,220,1);
 	vertical-align:top;
@@ -333,7 +431,7 @@ input[type='button']:active{
 
 /* DIV AJOUTER OBJET */
 #divAddObjet{
-	width:180px;
+	width:200px;
 }
 #tableOfObjet label{
 	font-size:8pt;
@@ -351,7 +449,9 @@ input[type='button']:active{
 #tableOfObjet img:active{
 	box-shadow:inset 0px 0px 5px rgb(150,150,150);
 }
-
+#tableOfObjet tr td{
+	/*border:1px solid red;*/
+}
 #tableOfObjet td input{
 	width:20px;
 	height:20px;
@@ -427,6 +527,16 @@ input[type='button']:active{
 #creatNameOfSave div input{	margin-bottom:5px;}
 
 .saisieError{color:red;font-size:8pt; font-weight:bold;}
+
+
+/* DETAIL FIX OUI NON */
+#detailFixOuiNon label{
+	font-size:8pt;
+	font-weight:bold;
+}
+#detailFixOuiNon{
+	margin-bottom:0px;
+}
 
 
 
