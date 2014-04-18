@@ -5,10 +5,10 @@ $(function(){
 	
 	
 	// GESTION DES DEUX APPLI (parc / map )
-	var appli = location.search ; // on lit l'url
-	var googleMap;
+	//var appli = location.search ; // on lit l'url
+	//var googleMap;
 	
-	if(appli.match(/map/gi) != null){ // MAP
+	/*if(appli.match(/map/gi) != null){ // MAP
 		$("#appliParcDeJeu").animate({width:'toggle'},0);
 		// INIT
 		// GOOGLE MAP
@@ -20,9 +20,9 @@ $(function(){
 			console.log("Erreur construction MyGoogleMap, raison : "+e);
 		}
 		
-	}else{ // PARC
+	}else{ // PARC*/
 		$("#appliGoogleMap").animate({width:'toggle'},0);
-	}
+	//}
 	
 	
 	// INIT
@@ -114,7 +114,7 @@ $(function(){
 					else
 						str += titleType[key]
 				}
-				
+				titleType = str;
 				data += " data-"+cptTableau+"='"+type+"' ";
 				typeBefore = type;
 				
@@ -206,7 +206,7 @@ $(function(){
 			
 			parcDeJeu.resizeEtCompleteEmpl(parcDeJeu.getTableOfContenu());
 		}else{
-			resizeMap();
+			//resizeMap();
 		}
 		
 	};
@@ -505,7 +505,7 @@ $(function(){
 	
 	
 	// CLICK SWITCH ECRAN
-	$(".switchEcran").click(function(){
+	/*$(".switchEcran").click(function(){
 		
 		// AFFICHE GOOGLE MAP
 		if( $("#appliParcDeJeu").css("display") != "none" ){
@@ -549,13 +549,13 @@ $(function(){
 					
 					parcDeJeu.resizeEtCompleteEmpl(parcDeJeu.getTableOfContenu());
 					
-					/*$("#divGoogleMap").html("");*/
+					//$("#divGoogleMap").html("");
 				});
 				
 			});
 		}		
 	});
-	
+	*/
 	
 	
 	// CLICK SEARCH MAS
@@ -656,10 +656,34 @@ $(function(){
 			else if (document.webkitCancelFullScreen) {
 			    document.webkitCancelFullScreen();
 			}
-		}
-		
-		
-		
-		
+		}		
 	});
+	
+	
+	
+	
+	
+	// Close DETAIL FIX
+	$("#closeDetailFixEmp").click(function(){			
+		$(".titleDiv").next("div").slideUp(200);
+		setTimeout(function(){
+			$("#detailFixEmp").animate({width:'toggle'},200);
+		},200);
+	});
+	
+	// DRAG
+	$("#detailFixEmp").draggable({ 
+	    axis: "y"
+	});
+	
+	// AFFICHE OU NON DIV DU DESSOUS
+	$(".titleDiv").click(function(){
+		var div = $(this).next('div');
+		
+		if(div.css("display") == "none")
+			div.slideDown(200);
+		else
+			div.slideUp(200);
+	});
+	
 });

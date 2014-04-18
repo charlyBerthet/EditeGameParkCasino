@@ -5,9 +5,9 @@
 		// Save
 		this.id = this.id || id || 'parcDeJeu';
 		this.name = this.name || "default";
-		this.width = this.width || width || 20;
+		this.width = this.width || width || 15;
 		
-		this.height = this.height || height || 15;
+		this.height = this.height || height || 10;
 		
 		this.listeOfMachines = this.listeOfMachines || new Array();
 		this.listeOfObjets = this.listeOfObjets || new Array();
@@ -17,7 +17,9 @@
 										'fumoir',
 										'caisse',
 										'mur horizontal','mur vertical', 'mur coin bas droit','mur coin bas gauche','mur coin haut droit','mur coin haut gauche',
-										'table'
+										'table de jeu',
+										'table',
+										'cadeaux'
 										);
 		
 		this.colorEmplacementVide = "rgba(240,240,240,1)";
@@ -423,10 +425,8 @@
 			
 			// On recupere le parc format json
 			var parcs = localStorage['parcDeJeu'];
-			if(parcs == 'undefined' || parcs == undefined || parcs == "")
+			if(parcs == 'undefined' || parcs == undefined || parcs == "" || parcs.length <= 0 || typeof parcs === "string")
 				return null;
-			
-			
 			
 			// on transforme en objet
 			parcs = JSON.parse( parcs) ;
@@ -808,50 +808,15 @@
 		
 		
 		
-		// DEPOS MACHINE OU OBJET SUR UN EMPLACEMENT 
-		$(".emplacement").click(function(e){
-			// on recupere ses coordonnees
-			var column = parseInt($(this).attr("data-column"));
-			var row = parseInt($(this).attr("data-row"));
-			var occupe = $(this).attr("data-occupe");
-			
-			
-			
-			// SI ON ETANT EN TRAIN DE DEPOSER UNE MACHINE
-			if( $("#rememberMoveNumMachine").text() != ""){
-				// on recupere le numero de machine
-				var numMachine = $("#machineADeposer").text();
-				
-				// Si l'emplacement n'est pas occupe, on depose la machine
-				if(occupe == 'false'){
-					var isOkay = moi.setEmplacementToMachine(numMachine,new Emplacement(column, row, true));
-					moi.clear();
-					moi.draw();
-					
-					// on supprimer la div en mouvement
-					$("#rememberMoveNumMachine").remove();
-					
-					// on remet a jour la div voir mes machines
-					moi.drawVoirMachineASous($("#lesMachines"));
-					
-				}			
-			}
-			
-			
-			// SI ON DEPOSE UN OBJET et que ce n'est pas occupe
-			else if($("#divDeposeObjet").html() != undefined && occupe == 'false'){
-				
-				var type = $("#divDeposeObjet img").attr("alt");
-				moi.setEmplacementToObjet(type,new Emplacement(column, row, true));
-				moi.clear();
-				moi.draw();
-				
-				
-				
-				// on supprimer la div en mouvement
-				$("#divDeposeObjet").remove();
-			}
-		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		// CORRIGE POSITION DETAIL
@@ -894,61 +859,170 @@
 		};
 		
 		
+		
+		// AFFICHE DETAILS FIXS
+		var showDetailFix = function(thisElem){
+			var type = thisElem.find(".titleEmplacement").text();
+			
+
+			// si c'est une MACHINE
+			if( type.toLowerCase().match(/machine/g) != null){
+				
+				if($("#detailFixEmp").css("display") == "none")
+					$("#detailFixEmp").animate({width:'toggle'},200);
+				
+				var num = thisElem.find(".num").text();
+				$("#titleDetailFixEmp").html(type+" n°<span id='numMachDetailFixEmp'>"+num+"</span>");
+				var machine = moi.getMachine(num);
+				
+				
+							// REMPLI DIV INFOS
+				$("#divLabelDetailFixEmp").html("<p>Type : </p><p>Marque : </p><p>N° socle : </p><p>Dénomi' : </p><p>Billets : </p><p>Tickets : </p><p>Jetons : </p><p>Jeu : </p>");
+				$("#divInfoDetailFixEmp").html("<div><p>Machine à sous</p><p title='"+machine.marque+"'>"+machine.marque+"</p><p>"+machine.numSocle+"</p><p>"+machine.denomination+"€</p><p>"+machine.billet+"</p><p>"+machine.ticket+"</p><p>"+machine.jeton+"</p><p title='"+machine.jeu+"'>"+machine.jeu+"</p></div>");
+
+				
+				
+							// REMPLI DIV PERFORMANCES
+				$("#performanceMachFixEmp").html("A développer..");
+			// Si ce n'est PAS une MACHINE
+			}else if(type != "" && type != undefined && type != "undefined"){
+				
+				if($("#detailFixEmp").css("display") == "none")
+					$("#detailFixEmp").animate({width:'toggle'},200);
+				
+				if(type.match(/mur/gi) != null)
+					type = "mur";
+				else if(type.match(/porte/gi) != null)
+					type = "porte";
+				
+							// REMPLI DIV INFOS
+				$("#titleDetailFixEmp").html("Objet");
+				$("#divLabelDetailFixEmp").html("<p>Type : </p>");
+				$("#divInfoDetailFixEmp").html("<div><p>"+type+"</p></div>");
+
+				
+						// REMPLI DIV PERFORMANCES
+				$("#performanceMachFixEmp").html("Pas de performance.");
+				
+			}
+		};
+		
+		
+		
+		
+		
+		
 		// SI ON HOVER UN EMPLACEMENT
 		$(".emplacement").hover(function(e){
 			
 			// si la case est occupee on affiche les details
 			if( $(this).attr("data-occupe") == "true"){
-				  
-				var num = $(this).find('.num').text();
 				
-				var machine = moi.getMachine(num);
+				if(  $("#butDetailRapideOuiNon").is(":checked") ){
+					
+					
+					// Detail rapide
 				
-				
-				if(machine != null){
-					// si le detail est deja affiché on le remove et le reaffiche
-					$("#detailMachine").remove();
-					
-					var detail = machine.getDetail();
-					
-					$("body").append(detail);
-					
-					// position de la souris
-					var x = e.pageX + 5;
-					var y = e.pageY + 5;
-					
-					
-					// DROITE ou GAUCHE ? on regarde on se situe la machine (si elle est au bord a droite, on modifie la pos des details
-					var pos = corrigeDroitGaucheHautBasDetail(x,y);
-					x = pos[0];	y = pos[1];
-					
-					
-					// on le position au niveau de la souris :)
-					$("#detailMachine").css({
-						"top":y+"px",
-						"left":x+"px"
-					});
-					
-					// et on suit la souris :)
-					$(this).mousemove(function(e){
+					var num = $(this).find('.num').text();
+					var machine = moi.getMachine(num);
+					if(machine != null){
+						// si le detail est deja affiché on le remove et le reaffiche
+						$("#detailMachine").remove();
+						
+						var detail = machine.getDetail();
+						
+						$("body").append(detail);
+						
+						// position de la souris
 						var x = e.pageX + 5;
 						var y = e.pageY + 5;
+						
 						
 						// DROITE ou GAUCHE ? on regarde on se situe la machine (si elle est au bord a droite, on modifie la pos des details
 						var pos = corrigeDroitGaucheHautBasDetail(x,y);
 						x = pos[0];	y = pos[1];
 						
+						
+						// on le position au niveau de la souris :)
 						$("#detailMachine").css({
 							"top":y+"px",
 							"left":x+"px"
 						});
-					});
+						
+						// et on suit la souris :)
+						$(this).mousemove(function(e){
+							var x = e.pageX + 5;
+							var y = e.pageY + 5;
+							
+							// DROITE ou GAUCHE ? on regarde on se situe la machine (si elle est au bord a droite, on modifie la pos des details
+							var pos = corrigeDroitGaucheHautBasDetail(x,y);
+							x = pos[0];	y = pos[1];
+							
+							$("#detailMachine").css({
+								"top":y+"px",
+								"left":x+"px"
+							});
+						});
+					}
+				
 				}
+				
 			}
 		},function(){
 			// on supp la div de detail
 			$("#detailMachine").remove();
+			$(this).unbind("mousemove");
 		});		
+		
+		
+		
+		
+		
+		// DEPOS MACHINE OU OBJET SUR UN EMPLACEMENT 
+		var deposeObjetOrMachine = function(e,thisElem){
+			
+			// on recupere ses coordonnees
+			var column = parseInt(thisElem.attr("data-column"));
+			var row = parseInt(thisElem.attr("data-row"));
+			var occupe = thisElem.attr("data-occupe");
+			
+			
+			
+			// SI ON ETANT EN TRAIN DE DEPOSER UNE MACHINE
+			if( $("#rememberMoveNumMachine").text() != ""){
+				// on recupere le numero de machine
+				var numMachine = $("#machineADeposer").text();
+				
+				// Si l'emplacement n'est pas occupe, on depose la machine
+				if(occupe == 'false'){
+					var isOkay = moi.setEmplacementToMachine(numMachine,new Emplacement(column, row, true));
+					moi.clear();
+					moi.draw();
+					
+					// on supprimer la div en mouvement
+					$("#rememberMoveNumMachine").remove();
+					
+					// on remet a jour la div voir mes machines
+					moi.drawVoirMachineASous($("#lesMachines"));
+					
+				}			
+			}
+			
+			
+			// SI ON DEPOSE UN OBJET et que ce n'est pas occupe
+			else if($("#divDeposeObjet").html() != undefined && occupe == 'false'){
+				
+				var type = $("#divDeposeObjet img").attr("alt");
+				moi.setEmplacementToObjet(type,new Emplacement(column, row, true));
+				moi.clear();
+				moi.draw();
+				
+				
+				
+				// on supprimer la div en mouvement
+				$("#divDeposeObjet").remove();
+			}
+		};
 		
 		
 		
@@ -956,10 +1030,10 @@
 		
 		
 		// DRAG AND DROP SPECIAL DE CHAQUE EMPLACEMENT
-		$(".emplacement").click(function(e){
+		var dragAndDropEmplacement = function(e,thisElem){
 			
 			// SI la case est occupee on donne la possibilité de bouger
-			if( $(this).attr("data-occupe") == "true"){
+			if( thisElem.attr("data-occupe") == "true"){
 				
 				var dropSurLaCaseDrag = false;
 				
@@ -969,7 +1043,7 @@
 					var columnBef = $("#emplacementEnMouvement").attr("data-column");
 					
 					// si il a reclique sur la case de depart
-					if(rowBef == $(this).attr('data-row') && columnBef == $(this).attr('data-column'))
+					if(rowBef == thisElem.attr('data-row') && columnBef == thisElem.attr('data-column'))
 						dropSurLaCaseDrag = true;
 					
 					moi.defaultShadowEmplacement(rowBef, columnBef);
@@ -991,26 +1065,26 @@
 					$("#deleteDuParc").css("display","inline");
 					
 					// on recupere tout ce QUI peu etrre interessant
-					var bg = $(this).css('background-color');
-					var row = $(this).attr('data-row');
-					var column = $(this).attr('data-column');
-					var occupe = $(this).attr('data-occupe');
-					var dataBg = $(this).attr("data-bg");
+					var bg = thisElem.css('background-color');
+					var row = thisElem.attr('data-row');
+					var column = thisElem.attr('data-column');
+					var occupe = thisElem.attr('data-occupe');
+					var dataBg = thisElem.attr("data-bg");
 					
 					// on montre lequel est choisi en affectant un SHADOW
-					$(this).css("box-shadow","inset 0px 0px 15px rgba(70,70,70,0.9)");
-					$(this).hover(function(){
-						$(this).css("box-shadow","inset 0px 0px 20px rgba(70,70,70,1)");
+					thisElem.css("box-shadow","inset 0px 0px 15px rgba(70,70,70,0.9)");
+					thisElem.hover(function(){
+						thisElem.css("box-shadow","inset 0px 0px 20px rgba(70,70,70,1)");
 					},function(){
-						$(this).css("box-shadow","inset 0px 0px 15px rgba(70,70,70,0.9)");
+						thisElem.css("box-shadow","inset 0px 0px 15px rgba(70,70,70,0.9)");
 					});
-					$(this).mousedown(function(){
-						$(this).css("box-shadow","inset 0px 0px 30px rgba(70,70,70,1)");
+					thisElem.mousedown(function(){
+						thisElem.css("box-shadow","inset 0px 0px 30px rgba(70,70,70,1)");
 					});
 					
 					// on rempli la div
 					var divMove = "<div id='emplacementEnMouvement'>"+
-						($(this).html())+
+						(thisElem.html())+
 						"</div>";
 					// on affiche la div
 					$("body").append(divMove);
@@ -1048,7 +1122,7 @@
 					var row = $("#emplacementEnMouvement").attr('data-row');
 					var column = $("#emplacementEnMouvement").attr('data-column');
 					// on change les objets d'emplacement
-					moi.changeEmplacement($("#emplacementEnMouvement"),$(this));
+					moi.changeEmplacement($("#emplacementEnMouvement"),thisElem);
 					// on remove la div drag n drop
 					$("#emplacementEnMouvement").remove();
 					
@@ -1061,11 +1135,75 @@
 				}
 			}
 			
+		};
+		
+		
+		
+		
+		
+		
+		// EVENT DEPOSE OBJET ou MACHINE SUR EMPLACEMENT
+		$(".emplacement").click(function(e){
+			deposeObjetOrMachine(e,$(this));
+			showDetailFix($(this));
+		});
+		
+		
+		moi.defaultShadowEmplacement(null,null);
+		
+		
+		
+						// DRAG AND DROP MAISON
+		
+		var ROW_ACTIVE = COLUMN_ACTIVE = MOUSE_X = MOUSE_Y = null, DRAG = DRAG_START = false;
+		
+		// MOUSE DOWN
+		$(".emplacement").mousedown(function(e){
+			ROW_ACTIVE = $(this).attr("data-row");
+			COLUMN_ACTIVE = $(this).attr("data-column");
+			MOUSE_X = e.pageX;
+			MOUSE_Y = e.pageY;
+			DRAG = true;
+			// BLOQUE LA SELECTION
+			$(document).mousedown(function(){return false;});
+		});
+		
+		// MOUSE MOVE
+		$("body").mousemove(function(e){
+			if(DRAG && !DRAG_START){
+				var deltaX = Math.abs(MOUSE_X - e.pageX);
+				var deltaY = Math.abs(MOUSE_Y - e.pageY);
+				// si on se rend compte qu'il commence un drag
+				if(deltaX > 15 || deltaY > 15){
+					DRAG_START = true;
+					dragAndDropEmplacement(e,$(".emplacement[data-row='"+ROW_ACTIVE+"'][data-column='"+COLUMN_ACTIVE+"']"));
+				}
+			}
+			
+		});
+		
+		// MOUSE UP
+		$(".emplacement").mouseup(function(e){
+			if(DRAG_START){
+				
+				// si il drop sur un emplacement vide ou le sien
+				if( $(this).attr("data-occupe") == "false" || ($(this).attr("data-row")== ROW_ACTIVE && $(this).attr("data-column") == COLUMN_ACTIVE)){
+					dragAndDropEmplacement(e,$(this));
+					DRAG_START = false;
+				}
+				
+			}
+			DRAG = false;
+			// LIBERT LA SELECTION
+			$(document).unbind("mousedown");
 		});
 		
 		
 		
-		
+		// DROP DELETE
+		$("#deleteDuParc div").mouseup(function(){
+			$("#deleteDuParc div").click();
+		});
 		
 		
 		// HOVER DELETE D'OBJET DU PARC EMPLACEMENT
@@ -1077,6 +1215,10 @@
 			if($("#emplacementEnMouvement").text() != "")
 				$(this).css("opacity","0.7");
 		});
+		
+		
+		
+		
 		
 		
 		// EFFET MOUSEDOWN DELETE
@@ -1161,18 +1303,19 @@
 	
 	// REMET SHADOW HOVER EMPLACEMENT PAR DEFAUT
 	ParcDeJeu.prototype.defaultShadowEmplacement = function(row,column){
+		var elem = (row == null && column == null ? $(".emplacement") : $(".emplacement[data-row='"+row+"'][data-column='"+column+"']")	);
 		// on remet les hover par default
-		$(".emplacement[data-row='"+row+"'][data-column='"+column+"']").css("box-shadow","0px 0px 3px rgba(70,70,190,0)");
-		$(".emplacement[data-row='"+row+"'][data-column='"+column+"']").hover(function(){
+		elem.css("box-shadow","0px 0px 3px rgba(70,70,190,0)");
+		elem.hover(function(){
 			$(this).css("box-shadow","0px 0px 3px rgba(70,70,190,0.8)");
 		},function(){
 			$(this).css("box-shadow","0px 0px 3px rgba(70,70,190,0)");
 		});
 		// on remet le active par default
-		$(".emplacement[data-row='"+row+"'][data-column='"+column+"']").mousedown(function(){
+		elem.mousedown(function(){
 			$(this).css("box-shadow","inset 0px 0px 3px rgba(70,70,190,0.8)");
 		});
-		$(".emplacement[data-row='"+row+"'][data-column='"+column+"']").mouseup(function(){
+		elem.mouseup(function(){
 			$(this).css("box-shadow","0px 0px 3px rgba(70,70,190,0.8)");
 		});
 	};
@@ -1249,8 +1392,8 @@
 	// LIBERT UN EMPLACEMENT
 	ParcDeJeu.prototype.libertEmplacement = function(row, column){
 		var empl = $(".emplacement[data-row='"+row+"'][data-column='"+column+"']");
-
-		empl.css("background-color",this.colorEmplacementVide)
+		empl.unbind("mousemove");
+		empl.css("background-color",this.colorEmplacementVide);
 		empl.attr('data-occupe','false');
 		empl.attr('data-bg','');
 		empl.children('.contentEmplacement').html("");

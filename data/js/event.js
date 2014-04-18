@@ -156,12 +156,12 @@ var resizeDiv = function(option){
 
 
 // RESIZE GOOGLE MAP
-var resizeMap = function(){
+/*var resizeMap = function(){
 	var SCREEN_WIDTH = (window.innerWidth);
 	var SCREEN_HEIGHT = (window.innerHeight) - 3;
 	$("#divGoogleMap").css("height",(SCREEN_HEIGHT)+"px");
 	$("#divGoogleMap").css("width",(SCREEN_WIDTH)+"px");
-};
+};*/
 
 
 

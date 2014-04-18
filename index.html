@@ -18,13 +18,13 @@
 	<script type="text/javascript" src="data/js/jquery-ui.js"></script>
 	<script type="text/javascript" src="data/js/jquery.clippy.js"></script>
 	<!-- INCLUSION GOOGLE MAP -->
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGvhpwzTzCYKXgEi0cBHuLHpIr-MQehwo&sensor=true"></script>
+	<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGvhpwzTzCYKXgEi0cBHuLHpIr-MQehwo&sensor=true"></script>	 -->
 	<!-- INCLUSION js CLASS -->
 	<script type="text/javascript" src="data/js/class/emplacement.js"></script>
 	<script type="text/javascript" src="data/js/class/machineASous.js"></script>
 	<script type="text/javascript" src="data/js/class/objet.js"></script>
 	<script type="text/javascript" src="data/js/class/parcDeJeu.js"></script>
-	<script type="text/javascript" src="data/js/class/MyGoogleMap.js"></script>
+	<!-- <script type="text/javascript" src="data/js/class/MyGoogleMap.js"></script>	 -->
 	<!-- INCLUSION js MAIN -->
 	<script type="text/javascript" src="data/js/event.js"></script>
 	<script type="text/javascript" src="data/js/main.js"></script>
@@ -162,6 +162,10 @@
 						<p class='titleParametre'>Parc <span id='nameParc'></span></p>
 						
 						
+						<p id="detailFixOuiNon">
+							<label>Détail rapide </label><input type="checkbox" id="butDetailRapideOuiNon" value="checkbox" checked />
+						</p>
+						
 						<!-- NOMBRE EMPLACEMENTS -->
 						<input class='butParametrePlus' data-image='data/img/size.png' id='butNbEmplacement' type='button' value='Taille' data-content='Taille'/>
 						<div class='divParametrePlus' id='nbEmplacement'>
@@ -270,9 +274,8 @@
 				</div>
 				
 				
-				
 				<!--  SWITCH ECRAN -->
-				<div id="ecranAppliParcDeJeu" class='switchEcran slideOpacity'></div>
+				<!-- <div id="ecranAppliParcDeJeu" class='switchEcran slideOpacity'></div>  -->
 			</div>
 	
 			
@@ -297,17 +300,37 @@
 				
 				<!-- SEARCH MAS DANS PARC -->
 				<div id="searchMAS"><div id="openOrCloseSearch"></div><input type='text' id="inSearchMAS" placeHolder="n° machine"/><button>x</button></div>
+				
+				
+				<!-- DETAIL FIX EMPLACEMENT -->
+				<div id="detailFixEmp">
+					<p id="pcloseDetailFixEmp"><input type='button' value='x' id="closeDetailFixEmp"/></p>
+					<p id="titleDetailFixEmp"></p>
+					
+					<p class="titleDiv">Infos</p>
+					<div id="detailMachFixEmp">						
+						<div id="divLabelDetailFixEmp"></div>
+						<div id="divInfoDetailFixEmp"></div>
+					</div>
+					
+					<p class="titleDiv">Performances</p>
+					<div id="performanceMachFixEmp">
+					</div>
+					
+					
+				</div>
+			
 			</div>
 		</div><!-- fin div appli parc de jeu -->
 		
 		
 		
-		<div id="appliGoogleMap">			
+		<!-- <div id="appliGoogleMap">			
 			
-			<!-- GOOGLE MAP -->
+			
 			<div id="divGoogleMap"></div>
 			
-			<!-- LEGENDE GOOGLE MAP -->
+			
 			<div id="legende">
 				<h3>Légende</h3>
 				<p><img src="data/img/legendeCasinoMegeve.svg"/><span>Casino de Megeve</span></p>
@@ -316,11 +339,11 @@
 			</div>
 			
 			
-			<!--  SWITCH ECRAN -->
+			
 			<div id="ecranAppliGoogleMap" class="switchEcran"></div>
 			
-		</div><!-- fin div appli GoogleMap -->
-		
+		</div>
+		 -->
 	</body>
 </div><!-- fin div all -->
 
